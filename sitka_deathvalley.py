@@ -48,8 +48,8 @@ for row in csvfile:
     dates1.append(thedate)
 
 
-try:
-    for row in csvfile2:
+for row in csvfile2:
+    try:
         highs2.append(
             int(row[header_row2.index("TMAX")])
         )  # by adding int the values are intigers
@@ -57,15 +57,22 @@ try:
         thedate = datetime.strptime(row[2], "%Y-%m-%d")
         dates2.append(thedate)
         row_count += 1
-        print(row_count)
-except:
-    print(f"This is the row with the data issue {row_count}")
+    except:
+        print(f"This is the row with the data issue {row_count}")
+    else:
+        highs2.append(
+            int(row[header_row2.index("TMAX")])
+        )  # by adding int the values are intigers
+        lows2.append(int(row[header_row2.index("TMIN")]))
+        thedate = datetime.strptime(row[2], "%Y-%m-%d")
+        dates2.append(thedate)
 
 print(highs2)
 print(lows2)
 
 import matplotlib.pyplot as plt
 
+""" 
 fig = plt.figure()
 plt.subplot(2, 1, 1)
 plt.plot(dates1, highs1, c="red", alpha=0.5)  # alpha is to make it transparent
@@ -93,7 +100,7 @@ plt.suptitle(
 fig.autofmt_xdate()
 
 plt.show()
-
+ """
 
 # the 2 is for the number of rows, the first 1 is the number of columns,
 # and the last one is the reference to the plot
